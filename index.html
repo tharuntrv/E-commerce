@@ -4,7 +4,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Script and Imagination Bookstore</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 1em 0;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 1em;
+        }
+
+            nav ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+            }
+
+                nav ul li {
+                    margin: 0 1em;
+                    display: inline;
+                }
+
+        a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .slider-container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+
+        .slider-navigation {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+            .slider-navigation button {
+                background-color: #333;
+                color: white;
+                border: none;
+                padding: 0.5em 1em;
+                cursor: pointer;
+            }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -13,18 +93,65 @@
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="catalog.php">Catalog</a></li>
+                <li><a href="login.php">Login</a></li>
                 <li><a href="register.php">Register</a></li>
                 <li><a href="cart.php">Shopping Cart</a></li>
             </ul>
         </nav>
     </header>
 
+    <div class="slider-container">
+        <div class="slider">
+            <img src="slider1.png" alt="Image 1">
+            <img src="slider2.png" alt="Image 2">
+            <img src="slider3.png" alt="Image 3">
+            <img src="slider4.png" alt="Image 4">
+        </div>
+
+        <div class="slider-navigation">
+            <button onclick="prevSlide()">Previous</button>
+            <button onclick="nextSlide()">Next</button>
+        </div>
+    </div>
+
     <div class="container">
-        <!-- Content will go here -->
+        <h2>Welcome to Script and Imagination Bookstore</h2>
+        <p>Explore our vast collection of books and enjoy a seamless shopping experience.</p>
+        <p>Not a member yet? <a href="register.php">Register now</a> to unlock exclusive benefits!</p>
+        <p>Already a member? <a href="login.php">Login</a> to browse and shop.</p>
     </div>
 
     <footer>
         <p>&copy; 2023 Script and Imagination Bookstore</p>
     </footer>
+
+    <script>
+        const slider = document.querySelector('.slider');
+        let count = 0;
+
+        function nextSlide() {
+            count++;
+            if (count > 3) {
+                count = 0;
+            }
+            updateSlide();
+        }
+
+        function prevSlide() {
+            count--;
+            if (count < 0) {
+                count = 3;
+            }
+            updateSlide();
+        }
+
+        function updateSlide() {
+            const translateValue = -count * 100 + '%';
+            slider.style.transform = 'translateX(' + translateValue + ')';
+        }
+
+        // Automatically move to the next slide every 3 seconds
+        setInterval(nextSlide, 3000);
+    </script>
 </body>
 </html>
